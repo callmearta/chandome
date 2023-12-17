@@ -1,7 +1,7 @@
-# Tauri + React + Typescript
+# Chandome?
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+This is a simple widget application for Macos displaying today's Persian date like a widget and also in the menubar.
 
-## Recommended IDE Setup
+## How to install?
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+Head over to [Releases](https://github.com/callmearta/chandome/releases) section and download latest release.
