@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tauri + React + TS</title>
+  </head>
+
+  <body>
+    <div data-tauri-drag-region class="titlebar" style="height:44px;width:100%;">
+      <img src="/move.svg" style="opacity:0.25;position:fixed;top:0;left:0;margin:12px;height:20px;pointer-events: none;" width="16" />
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

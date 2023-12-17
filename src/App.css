@@ -1,0 +1,106 @@
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Black.woff2") format("woff2");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn-Thin.woff2") format("woff2");
+  font-weight: 100;
+}
+
+* {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  user-select: none;
+}
+
+:root {
+  --text-color: rgb(252, 245, 237);
+  --bg-color: #1f1717;
+  --red-color: #ce5a67;
+}
+
+html {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: "Vazirmatn", sans-serif;
+  background: var(--text-color);
+  color: var(--bg-color);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.titlebar {
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  overflow: hidden;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #1f1717;
+    --bg-color: #fcf5ed;
+    --red-color: #ce5a67;
+  }
+}
+
+.container {
+  width: 100%;
+  height: calc(100vh - 74px);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.weekday {
+  margin-bottom: 2rem;
+  border-radius: 24px;
+  padding: 0 0.5rem;
+  font-size: 0.9rem;
+  padding-top: 0.05rem;
+  margin-top: -2.08rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.weekday::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  width: 100%;
+  height: 44px;
+  content: "";
+  display: block;
+  z-index: -1;
+  background: var(--red-color);
+}
+
+.day {
+  font-size: 3.5rem;
+  margin: 1.25rem 0;
+}
