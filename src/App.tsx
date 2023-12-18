@@ -1,10 +1,33 @@
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
+import { UnlistenFn, listen } from '@tauri-apps/api/event'
 
 function App() {
-  const weekday = new Date().toLocaleDateString('fa-IR', { weekday: "long" });
-  const year = new Date().toLocaleDateString('fa-IR', { year: 'numeric' });
-  const day = new Date().toLocaleDateString('fa-IR', { day: 'numeric' });
-  const month = new Date().toLocaleDateString('fa-IR', { month: 'long'});
+  const [date, setDate] = useState<Date>(new Date());
+  const weekday = useMemo(() => date.toLocaleDateString('fa-IR', { weekday: "long" }), [date]);
+  const year = useMemo(() => date.toLocaleDateString('fa-IR', { year: 'numeric' }), [date]);
+  const day = useMemo(() => date.toLocaleDateString('fa-IR', { day: 'numeric' }), [date]);
+  const month = useMemo(() => date.toLocaleDateString('fa-IR', { month: 'long' }), [date]);
+  const listenerRef = useRef<UnlistenFn>();
+
+  const listenForDateChange = async () => {
+    if (listenerRef.current) return;
+    listenerRef.current = await listen('date-changed', () => {
+      setDate(new Date());
+    })
+  }
+
+  useEffect(() => {
+    if (listenerRef.current)
+      listenerRef.current();
+
+    listenForDateChange();
+
+    return () => {
+      if (listenerRef.current)
+        listenerRef.current();
+    };
+  }, [listenerRef]);
 
 
   return (
