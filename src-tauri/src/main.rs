@@ -2,17 +2,19 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::{ActivationPolicy, CustomMenuItem, SystemTrayEvent, SystemTrayMenu};
-use tauri::{Manager, SystemTray, Window, AppHandle};
+use tauri::{AppHandle, Manager, SystemTray, Window};
 extern crate ptime;
 extern crate time;
-use chrono::{Local};
+use chrono::Local;
 use std::{thread, time::Duration};
+use fix_path_env;
 use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial, NSVisualEffectState};
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
 
 fn main() {
+    let _ = fix_path_env::fix(); // <---- Add this
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let tray_menu = SystemTrayMenu::new().add_item(quit);
     let tray = SystemTray::new().with_menu(tray_menu);
@@ -36,7 +38,7 @@ fn main() {
             let main_window = app.get_window("main").unwrap();
             let app_handle = app.app_handle();
 
-            check_date_change(main_window,app_handle);
+            check_date_change(main_window, app_handle);
 
             Ok(())
         })
@@ -53,7 +55,7 @@ fn main() {
         .expect("error while running tauri application");
 }
 
-fn check_date_change(main_window: Window, app_handle:AppHandle) {
+fn check_date_change(main_window: Window, app_handle: AppHandle) {
     thread::spawn(move || {
         let mut last_checked_date = Local::now().date_naive();
 
@@ -64,7 +66,9 @@ fn check_date_change(main_window: Window, app_handle:AppHandle) {
             let current_date = Local::now().date_naive();
             if current_date != last_checked_date {
                 let p_tm = ptime::from_gregorian(time::now());
-                let _ = app_handle.tray_handle().set_title(&p_tm.to_string("E d MMM"));
+                let _ = app_handle
+                    .tray_handle()
+                    .set_title(&p_tm.to_string("E d MMM"));
                 // If the date has changed, emit an event to the frontend
                 main_window
                     .emit_and_trigger("date-changed", current_date.format("%Y-%m-%d").to_string())
