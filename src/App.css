@@ -91,10 +91,10 @@ h6 {
   margin-bottom: 2rem;
   border-radius: 24px;
   padding: 0 0.5rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   padding-top: 0.05rem;
-  margin-top: -2.08rem;
-  color: rgba(255, 255, 255, 0.75);
+  margin-top: -2rem;
+  /* color: rgba(255, 255, 255, 0.75); */
 }
 
 .weekday::before {
@@ -108,7 +108,7 @@ h6 {
   content: "";
   display: block;
   z-index: -1;
-  background: var(--red-color);
+  /* background: rgba(255,255,255,.2); */
 }
 
 .day {
